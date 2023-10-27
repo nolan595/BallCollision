@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpt1jg5kbhm23"]
+
+[ext_resource type="Script" path="res://bucket.gd" id="1_nrqa7"]
+[ext_resource type="Texture2D" uid="uid://dlrlkmwc5yica" path="res://assets/bucket.png" id="2_k68jx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s238u"]
+radius = 23.0
+height = 182.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okk80"]
+radius = 13.0
+height = 136.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_nrqa7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("2_k68jx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 53)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_s238u")
+
+[node name="Ball Detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball Detection"]
+visible = false
+position = Vector2(3, -43)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_okk80")
+
+[connection signal="body_entered" from="Ball Detection" to="." method="_on_ball_detection_body_entered"]
